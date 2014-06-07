@@ -10,8 +10,10 @@
 
 @interface DwTableController() {
     NSMutableArray* _tableContents;
-    NSMutableArray* _imageNames;
+    NSMutableArray* _imageNames;    
+    BOOL    _editMode;
 }
+
 @end
 
 @implementation DwTableController
@@ -19,6 +21,7 @@
 - (id) initWithTableView:(UITableView *) tableView
 {
     if (self = [super init]) {
+        _editMode = YES;
         if (tableView) {
             // Become the delegate and dataSource of the tableView.
             tableView.delegate = self;            tableView.dataSource = self;
@@ -30,6 +33,23 @@
 - (id) init
 {
     return [self initWithTableView:NULL];
+}
+
+- (void) updateEditMode:(UITableView *) tableView withEditButton:(UIButton *) button
+{
+    if (tableView != nil && button != nil) {
+        if (_editMode) {
+            [button setTitle:@"Done" forState:UIControlStateNormal];
+            [tableView setEditing:YES animated:YES];
+            _editMode = NO;
+        }
+        else {
+            [button setTitle:@"Edit" forState:UIControlStateNormal];
+            [tableView setEditing:NO animated:YES];
+            _editMode = YES;
+        }
+
+    }
 }
 
 - (void) createTableContents
@@ -76,6 +96,16 @@
     cell.imageView.image = [UIImage imageNamed:_imageNames[indexPath.row]];
     
     return cell;
+}
+
+// For editing
+- (void) tableView:(UITableView *) tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [_tableContents removeObjectAtIndex:indexPath.row];
+        [_imageNames removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
 }
 
 @end

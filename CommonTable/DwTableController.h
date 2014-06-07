@@ -13,5 +13,6 @@
 
 - (id) initWithTableView:(UITableView *) tableView;
 - (void) createTableContents;
+- (void) updateEditMode:(UITableView *) tableView withEditButton:(UIButton *) button;
 
 @end
