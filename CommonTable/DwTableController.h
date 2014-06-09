@@ -14,5 +14,6 @@
 - (id) initWithTableView:(UITableView *) tableView;
 - (void) createTableContents;
 - (void) updateEditMode:(UITableView *) tableView withEditButton:(UIButton *) button;
+- (void) updateDeleteMode:(UITableView *) tableView withBarButtonItem:(UIBarButtonItem *) buttonItem;
 
 @end

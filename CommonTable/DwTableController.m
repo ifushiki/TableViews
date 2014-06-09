@@ -17,7 +17,7 @@ typedef enum {
 @interface DwTableController() {
     NSMutableArray* _tableContents;
     NSMutableArray* _imageNames;    
-    DwTableEditMode    _editMode;
+    BOOL    _editMode;
 }
 
 @end
@@ -27,7 +27,7 @@ typedef enum {
 - (id) initWithTableView:(UITableView *) tableView
 {
     if (self = [super init]) {
-        _editMode = DwTableEditModeNone;
+        _editMode = NO;
         if (tableView) {
             // Become the delegate and dataSource of the tableView.
             tableView.delegate = self;            tableView.dataSource = self;
@@ -47,14 +47,30 @@ typedef enum {
         if (_editMode) {
             [button setTitle:@"Done" forState:UIControlStateNormal];
             [tableView setEditing:YES animated:YES];
-            _editMode = NO;
+            _editMode = YES;
         }
         else {
             [button setTitle:@"Edit" forState:UIControlStateNormal];
             [tableView setEditing:NO animated:YES];
-            _editMode = YES;
+            _editMode = NO;
         }
 
+    }
+}
+
+- (void) updateDeleteMode:(UITableView *) tableView withBarButtonItem:(UIBarButtonItem *) buttonItem
+{
+    if (tableView != nil && buttonItem != nil) {
+        if (_editMode == NO) {
+            buttonItem.title = @"Done";
+            [tableView setEditing:YES animated:YES];
+            _editMode = YES;
+        }
+        else {
+            buttonItem.title = @"Delete";
+            [tableView setEditing:NO animated:YES];
+            _editMode = NO;
+        }
     }
 }
 
