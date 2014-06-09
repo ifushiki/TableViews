@@ -8,10 +8,16 @@
 
 #import "DwTableController.h"
 
+typedef enum {
+    DwTableEditModeNone = 0,
+    DwTableEditModeDelete = -1,
+    DwTableEditModeAdd = 1
+} DwTableEditMode;
+
 @interface DwTableController() {
     NSMutableArray* _tableContents;
     NSMutableArray* _imageNames;    
-    BOOL    _editMode;
+    DwTableEditMode    _editMode;
 }
 
 @end
@@ -21,7 +27,7 @@
 - (id) initWithTableView:(UITableView *) tableView
 {
     if (self = [super init]) {
-        _editMode = YES;
+        _editMode = DwTableEditModeNone;
         if (tableView) {
             // Become the delegate and dataSource of the tableView.
             tableView.delegate = self;            tableView.dataSource = self;
