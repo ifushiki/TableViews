@@ -41,6 +41,11 @@ typedef enum {
     return [self initWithTableView:NULL];
 }
 
+- (BOOL) isEditMode
+{
+    return _editMode;
+}
+
 - (void) updateEditMode:(UITableView *) tableView withEditButton:(UIButton *) button
 {
     if (tableView != nil && button != nil) {
@@ -58,7 +63,7 @@ typedef enum {
     }
 }
 
-- (void) updateDeleteMode:(UITableView *) tableView withBarButtonItem:(UIBarButtonItem *) buttonItem
+- (void) updateEditMode:(UITableView *) tableView withBarButtonItem:(UIBarButtonItem *) buttonItem
 {
     if (tableView != nil && buttonItem != nil) {
         if (_editMode == NO) {

@@ -12,8 +12,9 @@
 @interface DwTableController : NSObject <UITableViewDelegate, UITableViewDataSource>
 
 - (id) initWithTableView:(UITableView *) tableView;
+- (BOOL) isEditMode;
 - (void) createTableContents;
 - (void) updateEditMode:(UITableView *) tableView withEditButton:(UIButton *) button;
-- (void) updateDeleteMode:(UITableView *) tableView withBarButtonItem:(UIBarButtonItem *) buttonItem;
+- (void) updateEditMode:(UITableView *) tableView withBarButtonItem:(UIBarButtonItem *) buttonItem;
 
 @end
