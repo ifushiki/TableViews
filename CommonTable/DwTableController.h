@@ -1,6 +1,6 @@
 //
 //  DwTableController.h
-//  EmbeddedTableApp
+//  CommonTable
 //
 //  Created by IKKO FUSHIKI on 6/4/14.
 //  Copyright (c) 2014 IKKO FUSHIKI. All rights reserved.
