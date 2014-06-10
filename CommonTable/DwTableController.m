@@ -8,18 +8,9 @@
 
 #import "DwTableController.h"
 
-/*
-typedef enum {
-    DwTableEditModeNone = 0,
-    DwTableEditModeDelete = -1,
-    DwTableEditModeAdd = 1
-} DwTableEditMode;
- */
-
 @interface DwTableController() {
     NSMutableArray* _tableContents;
     NSMutableArray* _imageNames;    
-//    BOOL    _editMode;
 }
 
 @end
@@ -31,7 +22,6 @@ typedef enum {
 - (id) initWithTableView:(UITableView *) tableView andViewController:(UIViewController *)controller
 {
     if (self = [super init]) {
-//        _editMode = NO;
         if (tableView) {
             // Become the delegate and dataSource of the tableView.
             [tableView setEditing:NO];
@@ -48,26 +38,16 @@ typedef enum {
     return [self initWithTableView:nil andViewController:nil];
 }
 
-/*
-- (BOOL) isEditMode
-{
-    return _editMode;
-}
- */
-
 - (void) updateEditMode:(UITableView *) tableView withEditButton:(UIButton *) button
 {
     if (tableView != nil && button != nil) {
-//        if (_editMode) {
         if (tableView.isEditing == NO) {
             [button setTitle:@"Done" forState:UIControlStateNormal];
             [tableView setEditing:YES animated:YES];
-//            _editMode = YES;
         }
         else {
             [button setTitle:@"Edit" forState:UIControlStateNormal];
             [tableView setEditing:NO animated:YES];
-//            _editMode = NO;
         }
 
     }
@@ -76,23 +56,19 @@ typedef enum {
 - (void) updateEditMode:(UITableView *) tableView withBarButtonItem:(UIBarButtonItem *) buttonItem
 {
     if (tableView != nil && buttonItem != nil) {
-//        if (_editMode == NO) {
         if (tableView.isEditing == NO) {
             buttonItem.title = @"Done";
             [tableView setEditing:YES animated:YES];
-//            _editMode = YES;
         }
         else {
             buttonItem.title = @"Delete";
             [tableView setEditing:NO animated:YES];
-//            _editMode = NO;
         }
     }
 }
 
 - (void) createTableContents
 {
-    //  _tableContents = [[NSMutableArray alloc] initWithArray:[UIFont familyNames]];
     if (!_tableContents) {
         _tableContents = [[NSMutableArray alloc] initWithObjects:@"Number One", @"Number Two", @"Number Three", nil];
         _imageNames = [[NSMutableArray alloc] initWithObjects:@"calculator.png", @"iBooks.png", @"Phone.png", nil];

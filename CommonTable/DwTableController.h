@@ -15,7 +15,6 @@
 
 
 - (id) initWithTableView:(UITableView *) tableView andViewController:(UIViewController *) controller;
-//- (BOOL) isEditMode;
 - (void) createTableContents;
 - (void) updateEditMode:(UITableView *) tableView withEditButton:(UIButton *) button;
 - (void) updateEditMode:(UITableView *) tableView withBarButtonItem:(UIBarButtonItem *) buttonItem;
