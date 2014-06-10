@@ -8,56 +8,66 @@
 
 #import "DwTableController.h"
 
+/*
 typedef enum {
     DwTableEditModeNone = 0,
     DwTableEditModeDelete = -1,
     DwTableEditModeAdd = 1
 } DwTableEditMode;
+ */
 
 @interface DwTableController() {
     NSMutableArray* _tableContents;
     NSMutableArray* _imageNames;    
-    BOOL    _editMode;
+//    BOOL    _editMode;
 }
 
 @end
 
 @implementation DwTableController
 
-- (id) initWithTableView:(UITableView *) tableView
+@synthesize viewController;
+
+- (id) initWithTableView:(UITableView *) tableView andViewController:(UIViewController *)controller
 {
     if (self = [super init]) {
-        _editMode = NO;
+//        _editMode = NO;
         if (tableView) {
             // Become the delegate and dataSource of the tableView.
-            tableView.delegate = self;            tableView.dataSource = self;
+            [tableView setEditing:NO];
+            tableView.delegate = self;
+            tableView.dataSource = self;
         }
+        viewController = controller;
     }
     return self;
 }
 
 - (id) init
 {
-    return [self initWithTableView:NULL];
+    return [self initWithTableView:nil andViewController:nil];
 }
 
+/*
 - (BOOL) isEditMode
 {
     return _editMode;
 }
+ */
 
 - (void) updateEditMode:(UITableView *) tableView withEditButton:(UIButton *) button
 {
     if (tableView != nil && button != nil) {
-        if (_editMode) {
+//        if (_editMode) {
+        if (tableView.isEditing == NO) {
             [button setTitle:@"Done" forState:UIControlStateNormal];
             [tableView setEditing:YES animated:YES];
-            _editMode = YES;
+//            _editMode = YES;
         }
         else {
             [button setTitle:@"Edit" forState:UIControlStateNormal];
             [tableView setEditing:NO animated:YES];
-            _editMode = NO;
+//            _editMode = NO;
         }
 
     }
@@ -66,15 +76,16 @@ typedef enum {
 - (void) updateEditMode:(UITableView *) tableView withBarButtonItem:(UIBarButtonItem *) buttonItem
 {
     if (tableView != nil && buttonItem != nil) {
-        if (_editMode == NO) {
+//        if (_editMode == NO) {
+        if (tableView.isEditing == NO) {
             buttonItem.title = @"Done";
             [tableView setEditing:YES animated:YES];
-            _editMode = YES;
+//            _editMode = YES;
         }
         else {
             buttonItem.title = @"Delete";
             [tableView setEditing:NO animated:YES];
-            _editMode = NO;
+//            _editMode = NO;
         }
     }
 }
